@@ -7,7 +7,7 @@ starsRatingTemplate.innerHTML = `
 
 		/* global vars (with defaults) to enable users to style the component */
 		--rating-text-font: inherit;
-		--rating-stars-font: 1.75em/.8 sans-serif;
+		--rating-stars-font: 1.75rem/.8 sans-serif;
 		--rating-stars-color: black;
 		--rating-btn-bg-color: #0000FF33;
 		--rating-btn-color: currentcolor;
@@ -194,7 +194,7 @@ class StarsRating extends HTMLElement {
 		} else if (aRating < Number.EPSILON) {
 			ratingElm.textContent = "0";
 			ratingVal = 0;
-		} else if (aRating > 5) {
+		} else if (aRating >= 5) {
 			ratingElm.textContent = "5";
 			ratingVal = 5;
 		} else {
@@ -216,7 +216,7 @@ class StarsRating extends HTMLElement {
 	formatCount(count) {
 		// returns a string to set the attribute
 		count = parseInt(count);
-		if (count <= 0 || Number.isNaN(count)) {
+		if (Number.isNaN(count) || count <= 0) {
 			return "";
 		}
 		let val;

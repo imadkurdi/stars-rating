@@ -1,0 +1,28 @@
+stars-rating {
+	--rating-text-font: italic 0.75rem sans-serif;
+	--rating-stars-font: 1.75rem/0.8 sans-serif;
+	--rating-stars-color: red;
+	--rating-btn-bg-color: #0000ff33;
+	--rating-btn-color: currentcolor;
+	--rating-btn-shadow: 0 0 4px var(--rating-btn-color);
+	--rating-tip-color: #ffa;
+	--rating-tip-width: 4em;
+	--rating-tip-border: 1px solid #cc9;
+	--rating-tip-shadow: 0 0 6px #999;
+
+	outline: 1px solid blue;
+}
+
+#star2 {
+	--rating-text-font: 0.85rem sans-serif;
+	--rating-stars-color: blue;
+	outline: 1px solid red;
+}
+
+#star2::part(count) {
+	color: brown;
+}
+
+#star2::part(tip) {
+	background-color: chartreuse;
+}
