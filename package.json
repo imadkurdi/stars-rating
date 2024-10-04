@@ -1,23 +1,43 @@
 {
   "name": "@imadkurdi/stars-rating",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This is a 5 star rating component. A standard custom web component written in pure vanilla JS. So it could be used in any framework.",
   "main": "stars-rating.mjs",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/imadkurdi/stars-rating.git"
-  },
   "keywords": [
-    "stars",
     "rating",
+    "ratings",
+    "rate",
+    "stars",
+    "star",
+    "stars-rating",
+    "star-rating",
+    "stars rating",
+    "star rating",
+    "rating-stars",
+    "rating-star",
+    "rating stars",
+    "rating star",
+    "rating component",
+    "stars component",
+    "rating element",
+    "stars element",
+    "review",
+    "reviews",
+    "ui",
+    "browser",
+    "component",
     "web component",
     "custom element",
     "vanilla js"
   ],
   "author": "Imad Kurdi",
-  "license": "ISC",
+  "license": "MIT",
+  "homepage": "https://github.com/imadkurdi/stars-rating#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imadkurdi/stars-rating.git"
+  },
   "bugs": {
     "url": "https://github.com/imadkurdi/stars-rating/issues"
-  },
-  "homepage": "https://github.com/imadkurdi/stars-rating#readme"
+  }
 }

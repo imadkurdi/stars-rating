@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>stars-rating component</title>
+
+  <link rel="stylesheet" href="example.css">
+  <script type="module" src="stars-rating.js"></script>
+  
+  <script type="module">
+      document.body.querySelector("p > stars-rating").addEventListener("rating", useRateValue);
+
+      const stars = document.createElement("stars-rating");
+      stars.addEventListener("rating", useRateValue);
+      stars.id = "stars";
+      stars.rating = 2.61754;
+      stars.count = 12853;
+      document.querySelector("p").insertAdjacentElement("afterend", stars);
+      stars.beginRating();
+
+      // helper function
+      function useRateValue(evt) {
+        const outputElem = document.querySelector("output");
+        outputElem.textContent = `user rate is: ${evt.detail}`;
+      }
+  </script>
+</head>
+
+<body>
+  <p>This <code>stars-rating</code> component is added and activated ready-to-rate by JavaScript.</p>
+  <hr>
+  <p>This <code>stars-rating</code> component is added inside a paragraph <stars-rating rating="2.2" count="34" style="margin: 0 5px;"></stars-rating> by adding the <code>stars-rating</code> tag. User himself activates the rating function by clicking the <code>Rate</code> button.</p>
+  <hr>
+  <output></output>
+</body>
+
+</html>

@@ -1,28 +1,12 @@
-# "stars-rating" component
+# stars-rating component
+This is a 5-stars rating component. A standard custom web component written in pure vanilla JS. So it could be used in any framework.
 
-<br>
-
-> - ## Created by: **Imad Kurdi**
-> - ## Version: **1.0.0**
-> - ## Last update: **1-1-2021**
-
-<br><br>
-
-![component](./stars-rating.jpg)
-<br><br>
-
-## Description:
-
-This is a 5 star rating component. A standard custom web component written in pure vanilla JS. So it could be used in any framework.
-
----
-
-<br>
+![Example demonstrating the use of the stars-rating component](./example.gif)
 
 ## Usage:
+This component could be used to show current average rating value and the count of ratings. Developers could make the component ready to rating or could wait for users to click a button to start rating process. Users then choose the rating they want and click a button to send that rate. The component then raises an event to inform developers that a rating is sent. After that the component is no more active, meaning that users could not rate any more.
 
-Use it like any other tag:
-
+Use the component like any other tag:
 1. In html: `<stars-rating id="rater_1" rating="2.6" count="1520"></stars-rating>`
 2. In JS: `document.createElement("stars-rating")` or `new StarsRating()`
 
@@ -31,22 +15,12 @@ Use it like any other tag:
 
 - To change the words of the button alter this static array of the component class: `StarsRating.ratingBtnLabels = ["Rate", "Send"];`
 
----
-
-<br>
-
 ## Attributes:
-
-- rating ex: `rating="2.6"`
-- count ex: `count="1520"`
-
----
-
-<br>
+- rating attribute: `<stars-rating rating="2.6" ></stars-rating>`
+- count  attribute: `<stars-rating count="1520"></stars-rating>`
 
 ## Styling:
-
-1. Define in the element (one of its selectors blok) one or more of the following custom properties:
+1. Define in an element's selector blok one or more of the following custom properties:
 
 - `--rating-text-font`: component font
 - `--rating-stars-font`: stars font
@@ -74,13 +48,7 @@ or
 
   ex: `#rater_1::part(count) { color: red; }` to make the count number red
 
----
-
-<br>
-
 ## Events:
+- `rating`: The component defines this event to return the evaluation in event's property `event.detail`.
 
-The component defines this event to return the evaluation in event's property `event.detail`
-rating
-
-ex: `document.body.addEventListener("rating", e => { console.log(e.detail); });`
+  ex: `document.body.addEventListener("rating", e => { console.log(e.detail); });`

@@ -1,116 +1,116 @@
-const starsRatingTemplate = document.createElement("template");
-starsRatingTemplate.innerHTML = `
-<style>
-  :host {
-		display: inline-block;
-		cursor: default;
+const tmpl = document.createElement("template");
+tmpl.innerHTML = `
+	<style>
+	:host {
+			display: inline-block;
+			cursor: default;
 
-		/* global vars (with defaults) to enable users to style the component */
-		--rating-text-font: inherit;
-		--rating-stars-font: 1.75rem/.8 sans-serif;
-		--rating-stars-color: black;
-		--rating-btn-bg-color: #0000FF33;
-		--rating-btn-color: currentcolor;
-		--rating-btn-shadow: 0 0 4px var(--rating-btn-color);
-		--rating-tip-color: #ffa;
-		--rating-tip-width: 4em;
-		--rating-tip-border: 1px solid #cc9;
-		--rating-tip-shadow: 0 0 6px #999;
-	
-		/* local var */
-		--trangle-size: 10px;
-	}
-  #container {
-		position: relative;
-		outline: none;
-		font: var(--rating-text-font);
-	}
+			/* global vars (with defaults) to enable users to style the component */
+			--rating-text-font: inherit;
+			--rating-stars-font: 1.75rem/.8 sans-serif;
+			--rating-stars-color: black;
+			--rating-btn-bg-color: #0000FF33;
+			--rating-btn-color: currentcolor;
+			--rating-btn-shadow: 0 0 4px var(--rating-btn-color);
+			--rating-tip-color: #ffa;
+			--rating-tip-width: 4em;
+			--rating-tip-border: 1px solid #cc9;
+			--rating-tip-shadow: 0 0 6px #999;
+		
+			/* local var */
+			--trangle-size: 10px;
+		}
+	#container {
+			position: relative;
+			outline: none;
+			font: var(--rating-text-font);
+		}
 
-  #stars-group {
+	#stars-group {
+			display: flex;
+		}
+	.star {
+			flex-grow: 1;
+			text-align: center;
+			color: var(--rating-stars-color);
+			font: var(--rating-stars-font);
+			outline: none;
+		}
+	.star {
+			text-decoration-style: dotted;
+			text-decoration-thickness: 1px;
+		}
+
+	#rating-group {
 		display: flex;
-	}
-  .star {
-		flex-grow: 1;
-		text-align: center;
-		color: var(--rating-stars-color);
-		font: var(--rating-stars-font);
-		outline: none;
-	}
-  .star {
-		text-decoration-style: dotted;
-		text-decoration-thickness: 1px;
-	}
+			justify-content: space-between;
+			align-items: center;
+		}
+		[part="rateBtn"] {
+			font: var(--rating-text-font);
+			border: none;
+			border-radius: 5px;
+			background-color: var(--rating-btn-bg-color);
+			color: var(--rating-btn-color);
+			outline: none;
+		}
+		[part="rateBtn"]:hover:enabled, [part="rateBtn"]:focus:enabled {
+			box-shadow: var(--rating-btn-shadow);
+		}
+		[part="rateBtn"]:disabled {
+			filter: opacity(60%);
+		}
 
-  #rating-group {
-    display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-	[part="rateBtn"] {
-		font: var(--rating-text-font);
-		border: none;
-		border-radius: 5px;
-		background-color: var(--rating-btn-bg-color);
-		color: var(--rating-btn-color);
-		outline: none;
-	}
-	[part="rateBtn"]:hover:enabled, [part="rateBtn"]:focus:enabled {
-		box-shadow: var(--rating-btn-shadow);
-	}
-	[part="rateBtn"]:disabled {
-		filter: opacity(60%);
-	}
+		[part="tip"] {
+			visibility: hidden;
+			position: absolute;
+			inset-inline-start: 0;
+			inset-block-end: calc(100% + var(--trangle-size) / 2);
+			inline-size: var(--rating-tip-width);
+			border: var(--rating-tip-border);
+			border-radius: 4px;
+			background-color: var(--rating-tip-color);
+			box-shadow: var(--rating-tip-shadow);
+		}
+		[part="tip-text"] {
+			margin: 0;
+			padding: 2px;
+			padding-block-end: calc(var(--trangle-size) / 2 );
+			text-align: center;
+		}
+		#triangle {
+			position: absolute;
+			border-inline-end: inherit;
+			border-block-end: inherit;
+			inline-size: var(--trangle-size);
+			block-size: var(--trangle-size);
+			background-color: inherit;
+			margin-inline: auto;
+			inset-inline: 0;
+			inset-block-end: 0;
+			transform: translate(0, 50%) rotate(45deg);
+		}
+	</style>
 
-	[part="tip"] {
-		visibility: hidden;
-		position: absolute;
-		inset-inline-start: 0;
-		inset-block-end: calc(100% + var(--trangle-size) / 2);
-		inline-size: var(--rating-tip-width);
-		border: var(--rating-tip-border);
-		border-radius: 4px;
-		background-color: var(--rating-tip-color);
-		box-shadow: var(--rating-tip-shadow);
-	}
-	[part="tip-text"] {
-		margin: 0;
-		padding: 2px;
-		padding-block-end: calc(var(--trangle-size) / 2 );
-		text-align: center;
-	}
-	#triangle {
-		position: absolute;
-		border-inline-end: inherit;
-		border-block-end: inherit;
-		inline-size: var(--trangle-size);
-		block-size: var(--trangle-size);
-		background-color: inherit;
-		margin-inline: auto;
-		inset-inline: 0;
-		inset-block-end: 0;
-		transform: translate(0, 50%) rotate(45deg);
-	}
-</style>
-
-<div id="container" tabindex="-1">
-	<div id="stars-group" role="group" aria-label="5 stars">
-		<span class="star" part="stars" aria-label="star 1" data-n="1">&#9733;</span>
-		<span class="star" part="stars" aria-label="star 2" data-n="2">&#9733;</span>
-		<span class="star" part="stars" aria-label="star 3" data-n="3">&#9733;</span>
-		<span class="star" part="stars" aria-label="star 4" data-n="4">&#9733;</span>
-		<span class="star" part="stars" aria-label="star 5" data-n="5">&#9733;</span>
+	<div id="container" tabindex="-1">
+		<div id="stars-group" role="group" aria-label="5 stars">
+			<span class="star" part="stars" aria-label="star 1" data-n="1">&#9733;</span>
+			<span class="star" part="stars" aria-label="star 2" data-n="2">&#9733;</span>
+			<span class="star" part="stars" aria-label="star 3" data-n="3">&#9733;</span>
+			<span class="star" part="stars" aria-label="star 4" data-n="4">&#9733;</span>
+			<span class="star" part="stars" aria-label="star 5" data-n="5">&#9733;</span>
+		</div>
+		<div id="rating-group">
+			<button part="rateBtn" aria-label="rate" aria-describedby="elem-desc"></button>
+			<span part="rating"></span>
+			<span part="count"></span>
+			<span hidden id="elem-desc">click this button to start the rating process, choose a star out of 5, finally click this button to send your rating</span>
+		</div>
+		<div part="tip" role="tooltip">
+			<p part="tip-text"></p>
+			<div id="triangle"></div>
+		</div>
 	</div>
-	<div id="rating-group">
-		<button part="rateBtn" aria-label="rate" aria-describedby="elem-desc"></button>
-		<span part="rating"></span>
-		<span part="count"></span>
-		<span hidden id="elem-desc">click this button to start the rating process, choose a star out of 5, finally click this button to send your rating</span>
-	</div>
-	<div part="tip" role="tooltip">
-		<p part="tip-text"></p>
-		<div id="triangle"></div>
-	</div>
-</div>
 `;
 
 class StarsRating extends HTMLElement {
@@ -128,7 +128,7 @@ class StarsRating extends HTMLElement {
 	constructor() {
 		super();
 		this.attachShadow({ mode: "open" });
-		this.shadowRoot.appendChild(starsRatingTemplate.content.cloneNode(true));
+		this.shadowRoot.appendChild(tmpl.content.cloneNode(true));
 		this.stars = this.shadowRoot.querySelectorAll(".star");
 		this.rateBtn = this.shadowRoot.querySelector("[part='rateBtn']");
 		this.tip = this.shadowRoot.querySelector("[part='tip']");
@@ -231,7 +231,7 @@ class StarsRating extends HTMLElement {
 		}
 	}
 
-	beginRating(ev) {
+	beginRating() {
 		this.rateBtn.disabled = true;
 		this.rateBtn.removeEventListener("click", this.beginRating);
 		this.rateBtn.innerText = StarsRating.ratingBtnLabels[1];
@@ -267,7 +267,7 @@ class StarsRating extends HTMLElement {
 		ev.target.dispatchEvent(new KeyboardEvent("keydown", { keyCode: StarsRating.KEYS.ENTER }));
 	}
 
-	raiseRatingEvent(ev) {
+	raiseRatingEvent() {
 		this.rateBtn.disabled = true;
 		this.dispatchEvent(new CustomEvent("rating", { bubbles: true, composed: true, detail: this.selectedStar }));
 	}
@@ -338,4 +338,4 @@ class StarsRating extends HTMLElement {
 }
 
 customElements.define("stars-rating", StarsRating);
-export { StarsRating };
+export default StarsRating;

@@ -13,16 +13,20 @@ stars-rating {
 	outline: 1px solid blue;
 }
 
-#star2 {
+#stars {
 	--rating-text-font: 0.85rem sans-serif;
 	--rating-stars-color: blue;
 	outline: 1px solid red;
 }
 
-#star2::part(count) {
+#stars::part(count) {
 	color: brown;
 }
 
-#star2::part(tip) {
+#stars::part(tip) {
 	background-color: chartreuse;
+}
+
+output {
+	color: red;
 }
